@@ -1,2 +1,2 @@
-# SuperClawer
-A super clawer  to collect any data you want
+# SuperCrawler
+A super crawler  to collect any data you want
