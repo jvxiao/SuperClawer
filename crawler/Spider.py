@@ -9,13 +9,13 @@ def getSoup(url):
 	html = requests.get(url,headers = kv, allow_redirects=False)
 	if html.status_code==200:
 		soup = BeautifulSoup(html.content, 'lxml')
-		return soup
+		return soup, url
 		print(soup.prettify().encode('utf-8'))     # 编码问题
 	else:
 		print("Something wrong!")	
 
 
-def getLinks(soup):
+def getLinks(soup,url):
 	links_pool = []	
 	for links in soup.find_all('a', class_="title"):
 		if links.string!=None and links!=None:
@@ -25,7 +25,7 @@ def getLinks(soup):
 		print("something wrong happend")
 	
 
-def getContent(soup):
+def getContent(soup):   # 此处对应百度词条规则，不调用请忽略
 	contents=soup.find_all(class_="para")
 	for content in contents:
 		if content!=None:
@@ -34,8 +34,8 @@ def getContent(soup):
 
 def app1():
 	url = "https://www.jianshu.com/"
-	soup = getSoup(url)
-	getLinks(soup)
+	soup,_ = getSoup(url)
+	getLinks(soup, url)
 #print(soup.prettify())
 #contents=getContent(soup)
 #print(contents.encode("utf-8"))
